@@ -1,0 +1,11 @@
+{
+  "name": "${pom.name}",
+  "group": "${pom.groupId}",
+  "artifact": "${pom.artifactId}",
+  "version": "${pom.version}",
+  "branch": "${git.branch}",
+  "build": "${git.buildnumber}",
+  "time": "${formatted-timestamp}",
+  "jdk": "${java.version}",
+  "user": "${user.name}"
+}

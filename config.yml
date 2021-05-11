@@ -1,0 +1,92 @@
+# Dropwizard parameters
+# ===============================================================
+
+server:
+  applicationConnectors:
+    - type: http
+      port: 8080
+      bindHost: 0.0.0.0
+  adminConnectors:
+    - type: http
+      port: 8081
+  gzip:
+    bufferSize: 8KiB
+  shutdownGracePeriod: "5s"
+  registerDefaultExceptionMappers: true
+  requestLog:
+    appenders:
+      - type: file
+        currentLogFilename: logs/access.log
+        archivedLogFilenamePattern: logs/access.%i.log.gz
+        archivedFileCount: 10
+        maxFileSize: 10MB
+        bufferSize: 256KB
+
+logging:
+  level: INFO # default level, can be one of: OFF, ERROR, WARN, INFO, DEBUG, TRACE, ALL
+  loggers:
+    de.example.donutqueue: DEBUG
+    io.dropwizard: INFO
+  appenders:
+    - type: file
+      threshold: INFO
+      currentLogFilename: logs/service.log
+      archivedLogFilenamePattern: logs/service.%i.log.gz
+      archivedFileCount: 10
+      maxFileSize: 10MB
+      bufferSize: 256KB
+      logFormat: "%-5level [%d] %logger{0} - %msg%n"
+    # DEV setting to see service.log output in console - remove in productive environment
+    - type: console
+      threshold: INFO
+      target: stdout
+      logFormat: "%-5level [%d] %logger{0} - %msg%n"
+
+# Custom parameters
+# ===============================================================
+
+# Enter all origins which are allowed to access the content
+corsAllowOrigins:
+  - "*"
+
+# database settings
+database:
+  # the name of your JDBC driver
+  driverClass: org.h2.Driver
+  # the username
+  user: sa
+  # the password
+  password: sa
+  # the JDBC URL
+  url: jdbc:h2:mem:MODE=MySQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1;
+  # any properties specific to your JDBC driver:
+  properties:
+    characterEncoding: UTF-8
+    serverTimezone: UTC
+    useJDBCCompliantTimezoneShift: true
+  # the maximum amount of time to wait on an empty pool before throwing an exception
+  maxWaitForConnection: 1s
+  # the SQL query to run when validating a connection's liveness
+  validationQuery: "/* RESTful Service Health Check */ SELECT 1"
+  # the timeout before a connection validation queries fail
+  validationQueryTimeout: 3s
+  # the initial number of connections to open
+  initialSize: 1
+  # the minimum number of connections to keep open
+  minSize: 1
+  # the maximum number of connections to keep open
+  maxSize: 32
+  # whether or not idle connections should be validated
+  checkConnectionWhileIdle: true
+  # the amount of time to sleep between runs of the idle connection validation, abandoned cleaner and idle pool resizing
+  evictionInterval: 10s
+  # the minimum amount of time an connection must sit idle in the pool before it is eligible for eviction
+  minIdleTime: 1 minute
+  # set to true if the service should start even if it can't connect to the DB
+  ignoreExceptionOnPreLoad: true
+  # whether or not connections will be validated before being added to the pool. If the connection fails to validate, it won't be added to the pool.
+  checkConnectionOnConnect: true
+  # Whether or not connections will be validated after being returned to the pool. If the connection fails to validate, it will be dropped from the pool.
+  checkConnectionOnReturn: true
+  # Whether or not connections will be validated before being borrowed from the pool. If the connection fails to validate, it will be dropped from the pool, and another will be borrowed.
+  checkConnectionOnBorrow: true
