@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * contains different json mappers for different purposes
+ * This helper utility contains different easy to use json mappers.
  */
 public class JsonUtil {
 

@@ -21,7 +21,6 @@ public interface OrderDao {
     /*
      * Create
      */
-
     @SqlUpdate("create table if not exists orders\n" +
             "(\n" +
             "    client_id int primary key,\n" +
@@ -37,7 +36,6 @@ public interface OrderDao {
     /*
      * Read
      */
-
     @SqlQuery("SELECT * FROM " + OrderRow.TABLE_NAME + " WHERE client_id = :client_id")
     OrderRow getByClientId(@Bind("client_id") Integer clientId);
 
@@ -49,10 +47,6 @@ public interface OrderDao {
 
     @SqlQuery("SELECT COUNT(*) FROM " + OrderRow.TABLE_NAME + " WHERE premium_customer = true AND create_time < :create_time")
     int countOlderPremiums(@Bind("create_time") Timestamp createTime);
-
-    /*
-     * Update
-     */
 
     /*
      * Delete

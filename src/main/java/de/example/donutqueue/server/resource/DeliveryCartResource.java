@@ -17,6 +17,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+/**
+ * Contains resources related to delivery cart.
+ */
 @Path("delivery_cart")
 @Produces(ContentType.JSON)
 public class DeliveryCartResource extends AbstractResource {

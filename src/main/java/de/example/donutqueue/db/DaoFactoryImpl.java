@@ -3,6 +3,9 @@ package de.example.donutqueue.db;
 import de.example.donutqueue.db.dao.OrderDao;
 import org.jdbi.v3.core.Jdbi;
 
+/**
+ * Instantiates data access objects on demand.
+ */
 public class DaoFactoryImpl implements DaoFactory {
 
     private static DaoFactoryImpl instance = null;

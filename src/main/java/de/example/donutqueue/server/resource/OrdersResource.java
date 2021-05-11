@@ -18,6 +18,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
+/**
+ * Contains resources related to queued donut orders.
+ */
 @Path("orders")
 @Produces(ContentType.JSON)
 public class OrdersResource extends AbstractResource {

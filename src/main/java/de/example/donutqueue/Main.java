@@ -6,7 +6,6 @@ import com.google.common.collect.Sets;
 import de.example.donutqueue.core.logic.usecase.HealthcheckLogic;
 import de.example.donutqueue.db.DaoFactory;
 import de.example.donutqueue.db.DaoFactoryImpl;
-import de.example.donutqueue.server.filter.PreMatchingFilter;
 import de.example.donutqueue.server.resource.DeliveryCartResource;
 import de.example.donutqueue.server.resource.OrdersResource;
 import de.example.donutqueue.server.resource.SwaggerResource;
@@ -27,8 +26,8 @@ import javax.servlet.FilterRegistration;
 import java.util.EnumSet;
 
 /**
- * Dropwizard Server.<p>
- * Run with 'java -jar target/donut_queue-1.0.0.jar server config.yml'
+ * Dropwizard Server<p>
+ * Please check out README.md
  */
 public class Main extends Application<ConfigYaml> {
 
@@ -80,10 +79,7 @@ public class Main extends Application<ConfigYaml> {
         environment.jersey().register(new DeliveryCartResource(daoFactory));
         environment.jersey().register(new OrdersResource(daoFactory));
 
-        // global filters that are executed before/after request processing
-        environment.jersey().register(new PreMatchingFilter());
-
-        // Add filter that adds CORS related headers
+        // Add filter that adds CORS related headers (necessary for swagger to work properly)
         addCorsFilter(configuration, environment);
 
         // Swagger / OpenAPI endpoint
@@ -136,6 +132,11 @@ public class Main extends Application<ConfigYaml> {
 
     }
 
+    /**
+     * Custom exception mapping
+     *
+     * @param environment - dropwizard env
+     */
     private void addExceptionMapping(Environment environment) {
         // Register some default exception mappers (jersey api)
         // We disable dropwizard's default exception mappers via config.yml
@@ -143,9 +144,13 @@ public class Main extends Application<ConfigYaml> {
         // but re-register the ones which make sense for us here:
         environment.jersey().register(new JerseyViolationExceptionMapper());
         environment.jersey().register(new EarlyEofExceptionMapper());
-
     }
 
+    /**
+     * Run with 'java -jar target/donut_queue-1.0.0.jar server config.yml'
+     *
+     * @param args - the usual array of strings
+     */
     public static void main(final String... args) throws Exception {
         try {
             new Main().run(args);

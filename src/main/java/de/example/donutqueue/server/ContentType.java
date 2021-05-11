@@ -1,7 +1,7 @@
 package de.example.donutqueue.server;
 
 /**
- * Contains all Mime-Types the API consumes or produces
+ * Contains constants for all mime types the API consumes and produces
  */
 public class ContentType {
 

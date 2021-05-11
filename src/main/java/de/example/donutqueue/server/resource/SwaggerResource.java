@@ -12,7 +12,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.*;
 
 /**
- * Resource that makes Swagger JSON or YAML available at routes:
+ * Resource that makes Swagger JSON/YAML available on:
  *
  * /swagger
  * /openapi
