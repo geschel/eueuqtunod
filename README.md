@@ -4,10 +4,10 @@ How to build and start the Main application
 ---
 Requirements: *`git, maven, jre8+`*
 
-1. TODO git checkout
-1. enter project folder `cd {project_folder}`
+1. clone from git *`git clone https://git@github.com/geschel/eueuqtunod.git`*
+1. enter project folder `cd eueuqtunod`
 1. Run `mvn clean package` to build your application
-1. Start application with `java -jar target/donut-queue-1.0.0.jar server config.yml`
+1. Start application with `java -jar target/donut_queue-1.0.0.jar server config.yml`
 
 
 Technologies used:
